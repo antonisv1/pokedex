@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelade&display=swap');
+
+body {
+  background-color: hsl(350, 100%, 50%);
+  margin:0;
+  padding:0;
+}
+/*
+body {
+  background-image: url('./assets/bg.png');
+}
+  */
+
+
+.background-red {
+  background-color: hsl(350, 100%, 50%);
+  /*border: 5px solid black;
+  border-radius: 5px;
+  padding: 10px;*/
+}
+.pokedex-header-container {
+  display: flex;
+  align-items: center;
+  align-content: stretch;
+  justify-content: space-between;
+  height: 80%;
+  width: 100%;
+}
+
+.pokedex-header {
+  text-align: left;
+  font-size: 2rem;
+  color: hsla(0, 100%, 25%, 0.795);
+  font-weight: bold;
+  font-family: fantasy;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.pokedex-header img{
+  height: 70px;
+}
+.pokedex-header:hover {
+  color: hsla(0, 100%, 15%, 0.795);
+
+}
+.pokedex-header:visited {
+  color: hsla(0, 100%, 25%, 0.795);
+}
+.pokedex-header:visited:hover {
+  color: hsla(0, 100%, 15%, 0.795);
+}
+.pokedex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  align-content: center;
+  font-size: 2rem;
+  font-family: monospace;
+  margin: 10px;
+  border: 5px solid black;
+  border-radius: 20px;
+  margin: 0;
+  background-color: hsl(182, 15%, 62%);
+  padding-bottom: 20px;
+}
+.pokedex-controls {
+  font-weight: 200;
+  color: hsl(0, 0%, 37%);
+  padding: 10px;
+  flex: 1;
+
+ /* flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 10%;*/
+}
+
+.pokedex-controls button {
+
+  border: none;
+  border-radius: 10px;
+  font-size: 3rem;
+  padding: 10px 5px;
+  background-color: transparent;/*hsl(214, 76%, 40%);*/
+  margin: 5px;
+  transition: background-color 1s linear;
+  width: 3vw;
+  height: 100%; 
+
+}
+/*
+.pokedex-controls button:enabled {
+  background-color: hsl(214, 76%, 40%);
+}/*/
+.pokedex-controls button:enabled:hover {
+  background-color: hsl(214, 76%, 30%);
+  transition-duration: 0.1s;
+  cursor: pointer;
+  opacity: 60%;
+}
+
+.pokedex-controls button:disabled {
+  /*background-color: hsl(0, 0%, 74%);
+  transition-duration: 0.1s;*/
+  opacity: 20%;
+}
+  
+.pokedex-controls img:hover {
+  filter: invert(1);
+}
+
+
+.pokedex-display {
+  flex: 10;
+  height: 85vh;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  margin-top: 20px;
+  
+}
+.pokedex-display ul {
+  list-style-type: none;
+  flex-wrap: wrap;
+
+}
+.pokedex-display ul li{
+  list-style-type: none;
+  height: 6vh;
+  font-size: 2rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/*
+.pokemon-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: stretch;
+  justify-content: center;
+}
+*/
+/*
+.pokemon-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+*/
+.back {
+  background-image: url('./assets/back.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+.next {
+  background-image: url('./assets/next.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+
+}
+.next-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  text-decoration: none;
+  color: black ; /* Remove default underline */
+}
+
+.link:visited {
+  color: black ; /* Prevent color change on visited links */
+}
+.pokemon-card {
+  margin: 5px;
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  text-decoration: none;
+  border-radius: 5px;
+  height: 10vh;
+  display: flex;
+  background-color: hsl(0, 0%, 85%);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.pokemon-card img{
+  width:80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.pokemon-card:hover {
+  cursor: pointer;
+  background-color: hsl(0, 0%, 75%);
+}
+
+
+.pokemon {
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+  margin: 50px;
+}
+
+.pokemon-container {
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.pokemon-not-found {
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+  margin: 50px;
+}
+
+.pokemon div{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+}
+.pokemon h1 {
+  
+  font-weight: bold;
+  padding-left: 15px;
+  display: flex;
+
+}
+
+.pokemon  img {
+  border: 3px solid gray;
+  border-radius: 10px;
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+}
+
+.searchbar-container {
+  display: inline-flex;
+  height: 35px;
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  border: 3px solid hsl(0, 0%, 70%);
+  border-radius: 5px;
+  align-content: stretch;
+}
+.searchbar-container input{
+  background-color: hsl(0, 0%, 85%);
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  border-width: 0px;
+  border-radius: 2px;
+  margin-right: -2px;
+}
+.searchbar-container button {
+  background-color: hsl(0, 0%, 85%);
+  border-width: 0px;
+}
+.searchbar-container button:hover {
+  cursor: pointer;
+}
+
+.searchbar-container button img{
+  height: 30px;
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+}
+.searchbar-container input:active{
+  border: none ;
+}
+
+.led-cover {
+  border: 2px solid black; /* Add a black border */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Create a subtle shadow for glossiness */
+  border-radius: 50%;
+  background-color: gray;
+  display: inline-block;
+  margin: 0 10px;
+}
+.led {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: green;
+  animation: lightup 0.7s infinite linear;
+}
+
+#yellow-led {
+  animation-delay: 0.3s;
+}
+
+#green-led {
+  animation-delay: 0.6s;
+}
+
+@keyframes lightup {
+  0% {
+    filter: brightness(80%);
+  }
+  100% {
+    filter: brightness(150%);
+  }
+}
+
+.landing-container {
+  background-image: url('./assets/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+}

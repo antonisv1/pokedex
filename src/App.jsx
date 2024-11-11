@@ -1,7 +1,6 @@
 import Pokedex from "./Pokedex" 
 import { Route,  createBrowserRouter, createRoutesFromElements, RouterProvider,Routes, Link, BrowserRouter } from 'react-router-dom';
-import { useContext } from "react";
-import Pokemon from "./Pokemon2";
+import Pokemon from "./Pokemon";
 import LandingPage from "./LandingPage";
 import NotFound from "./NotFound";
 

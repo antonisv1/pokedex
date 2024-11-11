@@ -99,8 +99,8 @@ export default function Pokemon(props) {
                         { !(notFound) ?
                             
                               <div className="pokemon" id={name}>
-                                  <div><img src={image}/><h1>{name}</h1></div>
-                                  <div>Types: <ul>
+                                  <div><img className="pokemon-profile" src={image}/><h1>{name}</h1></div>
+                                  <div className="types-container">Types: <ul >
                                       
                                   {types.map((slot, index) => {
                                   const matchingType = allTypes.find(
@@ -108,7 +108,7 @@ export default function Pokemon(props) {
                                   );
                                   return (
                                     <li key={index}>
-                                      {matchingType && <img src={matchingType.url} alt={slot.type.name} />}
+                                      {matchingType && <img className="pokemon-type" src={matchingType.url} alt={slot.type.name} />}
                                     </li>
                                   );
                                 })}

@@ -53,8 +53,8 @@ export default function Pokedex() {
         <div className='background-red'>
         
             <div className="pokedex-header-container">
-                <Link className="pokedex-header" to="/1">
-                <img alt="Pokedex" src="./assets/pokedex-logo.png" />
+                <Link  className="pokedex-header" to="/1">
+                <img alt="Pokedex"  src="./assets/pokedex-logo.png" />
                 </Link>
                 <div>{(name.length===0)?<SearchBar/>:<></>}
                 <SmallLed id="red-led" color="red"/>

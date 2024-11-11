@@ -3,6 +3,7 @@ import { Route,  createBrowserRouter, createRoutesFromElements, RouterProvider,R
 import { useContext } from "react";
 import Pokemon from "./Pokemon2";
 import LandingPage from "./LandingPage";
+import NotFound from "./NotFound";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
        <Route path="/pokemon/:name" element={<Pokemon />} />
        <Route path="/:p/:n" element={<Pokedex />} />
        <Route path="/pokemon/:name" element={<Pokemon />} />
+       <Route path="*" element={<NotFound />} />
     </>          
      )
   );

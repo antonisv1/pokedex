@@ -2,7 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelade&display=swap');
 
 body {
-  background-color: hsl(350, 100%, 50%);
+  /*background-color: hsl(350, 100%, 50%);*/
+  background-image: url('./assets/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   margin:0;
   padding:0;
 }
@@ -15,6 +18,9 @@ body {
 
 .background-red {
   background-color: hsl(350, 100%, 50%);
+  height: 100%;
+  width: 100%;
+  padding-bottom: 49px;
   /*border: 5px solid black;
   border-radius: 5px;
   padding: 10px;*/
@@ -42,7 +48,7 @@ body {
   align-content: flex-start;
 }
 .pokedex-header img{
-  height: 70px;
+  height: 8vh;
 }
 .pokedex-header:hover {
   color: hsla(0, 100%, 15%, 0.795);
@@ -62,17 +68,17 @@ body {
   align-content: center;
   font-size: 2rem;
   font-family: monospace;
-  margin: 10px;
-  border: 5px solid black;
-  border-radius: 20px;
-  margin: 0;
+  border: 0.5vh solid black;
+  border-radius: 2vw;
+  margin: 0 5vw;
   background-color: hsl(182, 15%, 62%);
-  padding-bottom: 20px;
+  padding-bottom: 1vh;
 }
+
 .pokedex-controls {
   font-weight: 200;
   color: hsl(0, 0%, 37%);
-  padding: 10px;
+  padding: 1vh;
   flex: 1;
 
  /* flex-grow: 1;
@@ -83,13 +89,13 @@ body {
 .pokedex-controls button {
 
   border: none;
-  border-radius: 10px;
-  font-size: 3rem;
-  padding: 10px 5px;
+  border-radius: 1vw;
+  font-size: 3vh;
+  padding: 5vh 3vw;
   background-color: transparent;/*hsl(214, 76%, 40%);*/
   margin: 5px;
-  transition: background-color 1s linear;
-  width: 3vw;
+  transition: background-color 1s ease;
+  max-width: 10vw;
   height: 100%; 
 
 }
@@ -190,7 +196,8 @@ body {
   font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
   text-decoration: none;
   border-radius: 5px;
-  height: 10vh;
+  font-size: 3vw;
+  max-height: 10vh;
   display: flex;
   background-color: hsl(0, 0%, 85%);
   text-align: center;
@@ -198,9 +205,9 @@ body {
   justify-content: center;
 }
 .pokemon-card img{
-  width:80px;
-  height: 80px;
-  margin-right: 10px;
+  max-width: 10vw;
+  max-height: 10vh;
+  margin-right: 2vw;
 }
 
 .pokemon-card:hover {
@@ -209,16 +216,6 @@ body {
 }
 
 
-.pokemon {
-  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  align-content: flex-start;
-  margin: 50px;
-}
 
 .pokemon-container {
   flex-direction: column;
@@ -226,6 +223,7 @@ body {
   align-items: center;
   justify-content: center;
   align-content: flex-start;
+  font-size: 3vw;
 }
 
 .pokemon-not-found {
@@ -239,6 +237,29 @@ body {
   margin: 50px;
 }
 
+.pokemon {
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+  margin: 50px;
+  font-size: 2vh;
+}
+
+.pokemon h3 {
+  font-size: 2vh;
+}
+
+
+
+.pokemon ul li img{
+  width: 10vh;
+  
+}
+
 .pokemon div{
   display: flex;
   flex-direction: row;
@@ -250,20 +271,23 @@ body {
   font-weight: bold;
   padding-left: 15px;
   display: flex;
+  font-size: 3vh;
+  width: 10vw;
 
 }
 
 .pokemon  img {
-  border: 3px solid gray;
+  border: 0.3vw solid gray;
   border-radius: 10px;
-  width: 200px;
+  width: 10vw;
   height: auto;
+  padding: 0;
   object-fit: cover;
 }
 
 .searchbar-container {
   display: inline-flex;
-  height: 35px;
+  height: 3vh;
   font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
   border: 3px solid hsl(0, 0%, 70%);
   border-radius: 5px;
@@ -271,7 +295,10 @@ body {
 }
 .searchbar-container input{
   background-color: hsl(0, 0%, 85%);
+  max-width: 15vw;
+  max-height: 5vh;
   font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  font-size: 1vh;
   border-width: 0px;
   border-radius: 2px;
   margin-right: -2px;
@@ -285,7 +312,7 @@ body {
 }
 
 .searchbar-container button img{
-  height: 30px;
+  height: 2vh;
   font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
 }
 .searchbar-container input:active{
@@ -293,7 +320,7 @@ body {
 }
 
 .led-cover {
-  border: 2px solid black; /* Add a black border */
+  border: 0.2vh solid black; /* Add a black border */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Create a subtle shadow for glossiness */
   border-radius: 50%;
   background-color: gray;
@@ -301,8 +328,8 @@ body {
   margin: 0 10px;
 }
 .led {
-  width: 20px;
-  height: 20px;
+  width: 1vh;
+  height: 1vh;
   border-radius: 50%;
   background-color: green;
   animation: lightup 0.7s infinite linear;
@@ -326,11 +353,153 @@ body {
 }
 
 .landing-container {
-  background-image: url('./assets/bg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-height: 100vh;
+  min-width: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.landing-header {
+  padding-bottom: 5vh;
 
 }
+
+.landing-header img {
+  height: 8vh;
+}
+
+.landing-body {
+  display: flex;
+  align-items: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  flex-direction: column;
+  font-family: 'Press Start 2P', 'Pixelade','Roboto', sans-serif;
+  font-size: 2vh;
+  font-weight: 100;
+  padding: 2vw;
+  border: 0.3vh solid lightblue;
+  border-radius: 3px;
+  margin: 0 2vw;
+  background-color: rgba(240, 248, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  opacity: 90%;
+  min-height: 40vh;
+  width: 90%;
+}
+
+.landing-body-info {
+  align-items: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+.landing-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-content: stretch;
+  align-items: center;
+  justify-content: flex-end;
+  height: 20vh;
+  width: 100%;
+}
+
+.landing-footer img{
+  height: 8vh;
+}
+
+.running-image {
+  animation: run 10s infinite ease;
+}
+
+.not-found-container {
+
+  min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.not-found-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-content: stretch;
+  align-items: center;
+  width: 100%;
+}
+
+.not-found-footer img{
+
+  height: 20vh;
+}
+
+@keyframes run {
+  0% {
+    transform: translateX(-50%);
+  }
+  30% {
+    transform: translateX(30%);
+  }
+  35% {
+    transform: translateX(35%) translateY(-10px);
+  }
+  37% {
+    transform: translateX(40%) translateY(0);
+  }
+  
+  50% {
+    transform: translateX(50%);
+  }
+  60% {
+    transform: translateX(40%);
+  }
+  70% {
+    transform: translateX(10%);
+  }
+  80% {
+    transform: translateX(40%) translateY(-20px);
+  }
+  90% {
+    transform: translateX(40%) translateY(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.shine-element {
+  position: relative;
+  /* ... other styles for the element ... */
+}
+
+.shine-element::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0)   
+ 100%);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+

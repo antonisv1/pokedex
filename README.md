@@ -2,7 +2,7 @@
 
 A functional javascript page based on React.js library that uses PokeApi to fetch data.
 
-Pokedex is fully optimized for smartphones, tablets, and desktops, ensuring a seamless user experience across all devices.
+Pokedex is fully optimized using flexbox ensuring a seamless user experience across all devices (smartphones, tablets, and desktops).
 
 - **Optimized for all devices**
 - **Mobile-friendly**

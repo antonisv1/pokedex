@@ -1,4 +1,4 @@
-Pokedex # React + Vite
+# Pokedex # React + Vite
 
 A function react.js page that uses PokeApi to fetch data.
 

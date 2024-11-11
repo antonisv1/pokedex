@@ -1,6 +1,6 @@
 # Pokedex # React + Vite
 
-A functional javascript page based on React.js library that uses PokeApi to fetch data.
+A functional javascript web application based on React.js library that uses PokeApi to fetch data.
 
 Pokedex is fully optimized using flexbox ensuring a seamless user experience across all devices (smartphones, tablets, and desktops).
 

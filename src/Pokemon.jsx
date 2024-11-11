@@ -87,19 +87,22 @@ export default function Pokemon(props) {
       }
     }
 
-    return (<> 
+    return (<div className="pokemon-outer-container"> 
       { returnAvailable ?
-        <div   className="pokedex-controls">
-          <Link to={returnUrl}><img style={{height: "50px",width: "50px"}} src="/assets/back.png"/></Link>
+        <div   className="pokemon-controls">
+          <Link to={returnUrl}><img src="/assets/back.png"/></Link>
         </div> 
         : ""
       }
-                      <div className="pokedex-display" >
+                      <div className="pokemon-display" >
                         <div className="pokemon-container" style={loading?{display : "none"}:{display :"flex"}}>
                         { !(notFound) ?
                             
                               <div className="pokemon" id={name}>
-                                  <div><img className="pokemon-profile" src={image}/><h1>{name}</h1></div>
+                                  <div className="pokemon-profile-container">
+                                    <img alt="profile" className="pokemon-profile" src={image}/>
+                                    <div>{name}</div>
+                                  </div>
                                   <div className="types-container">Types: <ul >
                                       
                                   {types.map((slot, index) => {
@@ -127,7 +130,7 @@ export default function Pokemon(props) {
                         
                         
                     </div>
-                    </>
+                  </div>
         
     )
 }

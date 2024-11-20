@@ -7,7 +7,12 @@ export default function SearchBar() {
     const navigate = useNavigate();
 
     function handlePokemonNameChange(event) {
-        setPokemonName(event.target.value);
+        const newPokemonName = event.target.value.replace(/\d+/g, '').replace(/\s+/g, ''); // Remove all digits
+
+        // Check if the new value is less than or equal to 30 characters
+        if (newPokemonName.length <= 30) {
+          setPokemonName(newPokemonName);
+        }
     }
 
     function searchPokemon() {

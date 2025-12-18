@@ -53,9 +53,9 @@ export default function LandingPage() {
                     backdropFilter: "blur(20px)",
                     border: "2px solid rgba(255, 255, 255, 0.4)",
                     borderRadius: "2rem",
-                    padding: "3rem",
+                    padding: "2rem 1.5rem",
                     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-                    width: "100%",
+                    width: "90%",
                     maxWidth: "800px"
                 }}>
                     {/* Shine effect */}

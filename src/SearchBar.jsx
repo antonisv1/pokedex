@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export default function SearchBar() {
 
     const [pokemonName, setPokemonName] = useState("");
     const navigate = useNavigate();
+    const { p } = useParams();
 
     function handlePokemonNameChange(event) {
         const newPokemonName = event.target.value
@@ -20,25 +21,14 @@ export default function SearchBar() {
 
     function searchPokemon() {
         if (pokemonName.trim() === "") return;
-        navigate(pokemonName);
+        const page = Number.parseInt(`${p ?? ''}`, 10);
+        const safePage = Number.isFinite(page) && page > 0 ? page : 1;
+        navigate(`/${safePage}/${pokemonName}`);
         setPokemonName("");
     }
 
     return (
-        <div style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            background: "linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)",
-            border: "3px solid #333",
-            borderRadius: "0.75rem",
-            padding: "clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem)",
-            boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.2)",
-            fontFamily: '"Press Start 2P", "Pixelade", monospace',
-            transition: "all 0.2s",
-            width: "100%",
-            maxWidth: "min(400px, 90vw)"
-        }}>
+        <div className="flex items-stretch w-full max-w-[320px] rounded-lg border-3 border-t-neutral-300 border-l-neutral-300 border-r-neutral-500 border-b-neutral-600 bg-gradient-to-b from-sky-100 to-sky-200 shadow-[0_4px_8px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.7)] overflow-hidden">
             <input
                 type="text"
                 placeholder="Search Pokémon"
@@ -49,48 +39,16 @@ export default function SearchBar() {
                         searchPokemon();
                     }
                 }}
-                style={{
-                    background: "transparent",
-                    border: "none",
-                    flex: 1,
-                    padding: "clamp(0.25rem, 1vw, 0.5rem)",
-                    fontSize: "clamp(0.6rem, 2vw, 0.75rem)",
-                    fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                    color: "#333",
-                    outline: "none",
-                    minWidth: 0
-                }}
+                className="flex-1 min-w-0 bg-transparent border-0 outline-none px-3 py-2 text-[clamp(0.6rem,1.4vw,0.75rem)] text-slate-700 placeholder:text-slate-500"
                 aria-label="Search for a Pokémon"
             />
             <button
                 onClick={searchPokemon}
-                style={{
-                    background: "linear-gradient(135deg, #0099ff 0%, #0066cc 100%)",
-                    border: "2px solid #003366",
-                    color: "white",
-                    padding: "clamp(0.4rem, 1.5vw, 0.6rem) clamp(0.5rem, 2vw, 0.75rem)",
-                    borderRadius: "0.5rem",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "all 0.2s",
-                    boxShadow: "0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
-                    fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)",
-                    flexShrink: 0
-                }}
-                onMouseEnter={(e) => {
-                    e.target.style.transform = "scale(1.1)";
-                    e.target.style.boxShadow = "0 4px 10px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2)";
-                }}
-                onMouseLeave={(e) => {
-                    e.target.style.transform = "scale(1)";
-                    e.target.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)";
-                }}
+                className="shrink-0 border-l-2 border-l-neutral-400 bg-gradient-to-b from-white via-neutral-50 to-neutral-200 w-10 flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.05)] transition-all active:bg-gradient-to-b active:from-neutral-100 active:to-neutral-200 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.15)] hover:from-neutral-50 hover:to-neutral-100"
                 title="Search for Pokémon"
                 aria-label="Search button"
             >
-                <FaMagnifyingGlass />
+                <FaMagnifyingGlass className="w-4 h-4 text-slate-600" />
             </button>
         </div>
     )

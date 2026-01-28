@@ -1,12 +1,7 @@
-import { PageContext} from "./Pokedex";
-import React, {useContext,useState,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { FaChevronLeft } from 'react-icons/fa6';
-import SmallLed from './SmallLed';
-import SearchBar from './SearchBar';
-import tailwindConfig from "../tailwind.config";
 
-export default function PokemonInfo(props) {
+export default function PokemonInfo() {
     const allTypes = [
         {type:"normal",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/1.png"},
         {type:"fighting",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/2.png"},
@@ -37,8 +32,7 @@ export default function PokemonInfo(props) {
     const [abilities,setAbilities] = useState([]);
     const [stats,setStats] = useState([]);
     const [baseExp,setBaseExp] = useState(0);
-    const {page} = useContext(PageContext);
-    const { p, id } = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const [url,setUrl] = useState("");
     const [name,setName] = useState("");
@@ -92,480 +86,120 @@ export default function PokemonInfo(props) {
       }
     }
 
-    const handleBack = () => {
-        // Go back to the correct page
-        navigate(`/${p}`);
-    };
-
     return (
-        <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "clamp(0.5rem, 2vw, 2rem)",
-            fontFamily: '"Press Start 2P", "Pixelade", monospace',
-            minHeight: "100vh"
-        }}>
-            {/* Pokédex Device Container */}
-            <div style={{
-                background: "linear-gradient(135deg, #cc0000 0%, #ff3333 50%, #990000 100%)",
-                borderRadius: "clamp(1rem, 2vw, 2rem)",
-                padding: "clamp(1rem, 2vw, 2rem)",
-                maxWidth: "1400px",
-                width: "100%",
-                minHeight: "90vh",
-                maxHeight: "95vh",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2)",
-                border: "4px solid #660000",
-                position: "relative",
-                display: "flex",
-                flexDirection: "column"
-            }}>
-                {/* Top Section with Logo and LEDs */}
-                <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                    gap: "1rem",
-                    marginBottom: "clamp(1rem, 2vw, 2rem)",
-                    paddingBottom: "clamp(0.5rem, 2vw, 1rem)",
-                    borderBottom: "3px solid rgba(0,0,0,0.3)"
-                }}>
-                    <div style={{ flex: "1 1 auto", display: "flex", alignItems: "center" }}>
-                        <img 
-                            alt="Pokedex" 
-                            src="/assets/pokedex-logo.png" 
-                            style={{
-                                height: "clamp(50px, 10vw, 80px)",
-                                maxWidth: "100%",
-                                objectFit: "contain",
-                                filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))",
-                                userSelect: "none"
-                            }}
-                        />
-                    </div>
-                    
-                    {/* LED Indicators */}
-                    <div style={{
-                        display: "flex",
-                        gap: "0.5rem",
-                        alignItems: "center",
-                        flexShrink: 0
-                    }}>
-                        <SmallLed id="red-led" color="#dc2626" />
-                        <SmallLed id="yellow-led" color="#fbbf24" />
-                        <SmallLed id="green-led" color="#22c55e" />
-                    </div>
+        <div className="w-full flex flex-col items-center font-retro">
+            {loading ? (
+                <div className="flex flex-col items-center justify-center gap-4 py-10">
+                    <img
+                        src={`${import.meta.env.BASE_URL}assets/animation.gif`}
+                        alt="Loading"
+                        className="w-24 h-24"
+                    />
+                    <p className="text-xs text-neutral-800 m-0">Loading...</p>
                 </div>
-
-                {/* Search Bar */}
-                <div style={{ 
-                    marginBottom: "clamp(1rem, 2vw, 1.5rem)",
-                    display: "flex",
-                    justifyContent: "center"
-                }}>
-                    <SearchBar />
-                </div>
-
-                {/* Screen Display */}
-                <div className="pokedex-screen" style={{
-                    background: "linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)",
-                    borderRadius: "clamp(0.5rem, 2vw, 1rem)",
-                    padding: "clamp(1rem, 2vw, 2rem)",
-                    border: "clamp(4px, 1vw, 8px) solid #333",
-                    boxShadow: "inset 0 4px 8px rgba(0,0,0,0.1)",
-                    height: "60dvh",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    marginBottom: "clamp(1rem, 2vw, 2rem)",
-                    overflowY: "auto"
-                }}>
-                    {loading ? (
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            gap: "1rem",
-                            height: "100%"
-                        }}>
-                            <img 
-                                src="/assets/animation.gif" 
-                                alt="Loading" 
-                                style={{
-                                    width: "96px",
-                                    height: "96px",
-                                    flexShrink: 0
-                                }}
+            ) : (
+                <div className="w-full max-w-3xl retro-card">
+                    <div className="flex flex-col items-center gap-4 mb-6">
+                        {image && (
+                            <img
+                                alt={`${name} profile`}
+                                src={image}
+                                className="w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-full p-2 border-4 border-gray-300 shadow-lg object-cover"
                             />
-                            <p style={{
-                                fontSize: "0.75rem",
-                                color: "#333",
-                                fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                                margin: "0",
-                                flexShrink: 0
-                            }}>
-                                Loading...
-                            </p>
+                        )}
+                        <h1 className="text-red-600 text-xl sm:text-2xl font-bold capitalize m-0">
+                            {name}
+                        </h1>
+                    </div>
+
+                    <div className="mb-6 text-center">
+                        <h3 className="text-red-600 text-sm sm:text-base mb-3 m-0">Types</h3>
+                        <ul className="flex flex-wrap justify-center gap-3 list-none p-0 m-0">
+                            {types.map((slot, index) => {
+                                const matchingType = allTypes.find(
+                                    (type) => type.type === slot.type.name
+                                );
+                                return (
+                                    <li
+                                        key={index}
+                                        className="transition-transform hover:scale-110"
+                                        title={slot.type.name}
+                                    >
+                                        {matchingType && (
+                                            <img
+                                                src={matchingType.url}
+                                                alt={slot.type.name}
+                                                className="w-[clamp(60px,15vw,96px)] h-auto bg-white p-1 rounded-lg border-2 border-gray-300 shadow-md"
+                                            />
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+
+                    <div className="space-y-3">
+                        <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
+                            <h3 className="text-red-600 text-sm m-0">📏 Height</h3>
+                            <span className="text-gray-800 font-bold text-sm">
+                                {addDecimalPoint(height)} m
+                            </span>
                         </div>
-                    ) : (
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            width: "100%",
-                            maxWidth: "800px",
-                            gap: "1.5rem",
-                            padding: "1rem 0"
-                        }}>
-                            {/* Profile Section */}
-                            <div style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                gap: "1rem",
-                                width: "100%"
-                            }}>
-                                {image && (
-                                    <img
-                                        alt={`${name} profile`}
-                                        src={image}
-                                        style={{
-                                            width: "clamp(96px, 20vw, 140px)",
-                                            height: "clamp(96px, 20vw, 140px)",
-                                            backgroundColor: "white",
-                                            borderRadius: "50%",
-                                            padding: "clamp(8px, 2vw, 12px)",
-                                            border: "2px solid #d1d5db",
-                                            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
-                                            objectFit: "contain",
-                                            display: "block",
-                                            flexShrink: 0
-                                        }}
-                                    />
-                                )}
-                                <h1 style={{
-                                    color: "#dc2626",
-                                    fontSize: "clamp(1rem, 4vw, 1.5rem)",
-                                    fontWeight: "bold",
-                                    textTransform: "capitalize",
-                                    margin: "0"
-                                }}>
-                                    {name}
-                                </h1>
-                            </div>
+                        <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
+                            <h3 className="text-red-600 text-sm m-0">⚖️ Weight</h3>
+                            <span className="text-gray-800 font-bold text-sm">
+                                {addDecimalPoint(weight)} kg
+                            </span>
+                        </div>
+                        <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
+                            <h3 className="text-red-600 text-sm m-0">⭐ Base Exp</h3>
+                            <span className="text-gray-800 font-bold text-sm">{baseExp}</span>
+                        </div>
+                    </div>
 
-                            {/* Types */}
-                            <div style={{
-                                marginBottom: "1.5rem",
-                                textAlign: "center",
-                                width: "100%"
-                            }}>
-                                <h3 className="mb-3 m-0" style={{
-                                    color: "#dc2626",
-                                    fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
-                                }}>
-                                    Types</h3>
-                                <ul style={{
-                                    display: "flex",
-                                    flexWrap: "wrap",
-                                    justifyContent: "center",
-                                    gap: "clamp(0.5rem, 1.5vw, 0.75rem)",
-                                    listStyle: "none",
-                                    padding: "0",
-                                    margin: "0"
-                                }}>
-                                    {types.map((slot, index) => {
-                                        const matchingType = allTypes.find(
-                                            (type) => type.type === slot.type.name
-                                        );
-                                        return (
-                                            <li
-                                                key={index}
-                                                style={{
-                                                    transition: "transform 0.2s"
-                                                }}
-                                                onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.1)"}
-                                                onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-                                                title={slot.type.name}
-                                            >
-                                                {matchingType && (
-                                                    <img
-                                                        src={matchingType.url}
-                                                        alt={slot.type.name}
-                                                        style={{
-                                                            backgroundColor: "white",
-                                                            padding: "clamp(2px, 0.5vw, 4px)",
-                                                            borderRadius: "8px",
-                                                            border: "2px solid #d1d5db",
-                                                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                                                            width: "clamp(60px, 15vw, 96px)",
-                                                            height: "auto"
-                                                        }}
-                                                    />
-                                                )}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
+                    {abilities.length > 0 && (
+                        <div className="w-full mt-5">
+                            <h3 className="text-red-600 text-sm sm:text-base mb-2 text-center m-0">
+                                🎯 Abilities
+                            </h3>
+                            <div className="flex flex-wrap justify-center gap-2">
+                                {abilities.map((ability, index) => (
+                                    <span
+                                        key={index}
+                                        className="bg-red-600/10 text-red-600 border border-red-600 rounded-md px-3 py-2 text-[clamp(0.6rem,1.5vw,0.7rem)] font-bold capitalize"
+                                    >
+                                        {ability.ability.name}
+                                        {ability.is_hidden && ' (H)'}
+                                    </span>
+                                ))}
                             </div>
+                        </div>
+                    )}
 
-                            {/* Physical Stats */}
-                            <div style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "clamp(0.5rem, 1.5vw, 0.75rem)",
-                                width: "100%"
-                            }}>
-                                <div style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                    backgroundColor: "rgba(255, 255, 255, 0.6)",
-                                    padding: "clamp(0.5rem, 1.5vw, 0.75rem)",
-                                    borderRadius: "8px",
-                                    borderLeft: "4px solid #dc2626"
-                                }}>
-                                    <h3 style={{
-                                        color: "#dc2626",
-                                        fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
-                                        margin: "0"
-                                    }}>📏 Height</h3>
-                                    <span style={{
-                                        color: "#1f2937",
-                                        fontWeight: "bold",
-                                        fontSize: "clamp(0.65rem, 2vw, 0.875rem)"
-                                    }}>
-                                        {addDecimalPoint(height)} m
-                                    </span>
-                                </div>
-                                <div style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                    backgroundColor: "rgba(255, 255, 255, 0.6)",
-                                    padding: "clamp(0.5rem, 1.5vw, 0.75rem)",
-                                    borderRadius: "8px",
-                                    borderLeft: "4px solid #dc2626"
-                                }}>
-                                    <h3 style={{
-                                        color: "#dc2626",
-                                        fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
-                                        margin: "0"
-                                    }}>⚖️ Weight</h3>
-                                    <span style={{
-                                        color: "#1f2937",
-                                        fontWeight: "bold",
-                                        fontSize: "clamp(0.65rem, 2vw, 0.875rem)"
-                                    }}>
-                                        {addDecimalPoint(weight)} kg
-                                    </span>
-                                </div>
-                                <div style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                    backgroundColor: "rgba(255, 255, 255, 0.6)",
-                                    padding: "clamp(0.5rem, 1.5vw, 0.75rem)",
-                                    borderRadius: "8px",
-                                    borderLeft: "4px solid #dc2626"
-                                }}>
-                                    <h3 style={{
-                                        color: "#dc2626",
-                                        fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
-                                        margin: "0"
-                                    }}>⭐ Base Exp</h3>
-                                    <span style={{
-                                        color: "#1f2937",
-                                        fontWeight: "bold",
-                                        fontSize: "clamp(0.65rem, 2vw, 0.875rem)"
-                                    }}>
-                                        {baseExp}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Abilities */}
-                            {abilities.length > 0 && (
-                                <div style={{
-                                    width: "100%",
-                                    marginTop: "clamp(0.5rem, 2vw, 1rem)"
-                                }}>
-                                    <h3 style={{
-                                        color: "#dc2626",
-                                        fontSize: "clamp(0.7rem, 2vw, 0.875rem)",
-                                        margin: "0 0 0.5rem 0",
-                                        textAlign: "center"
-                                    }}>🎯 Abilities</h3>
-                                    <div style={{
-                                        display: "flex",
-                                        flexWrap: "wrap",
-                                        gap: "clamp(0.4rem, 1vw, 0.5rem)",
-                                        justifyContent: "center"
-                                    }}>
-                                        {abilities.map((ability, index) => (
-                                            <span
-                                                key={index}
-                                                style={{
-                                                    backgroundColor: "rgba(220, 38, 38, 0.1)",
-                                                    color: "#dc2626",
-                                                    padding: "clamp(0.4rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 0.75rem)",
-                                                    borderRadius: "6px",
-                                                    fontSize: "clamp(0.6rem, 1.5vw, 0.7rem)",
-                                                    border: "1px solid #dc2626",
-                                                    fontWeight: "bold",
-                                                    textTransform: "capitalize"
-                                                }}
-                                            >
-                                                {ability.ability.name}
-                                                {ability.is_hidden && " (H)"}
-                                            </span>
-                                        ))}
+                    {stats.length > 0 && (
+                        <div className="w-full mt-5 bg-white/40 border-2 border-red-600/20 rounded-lg p-4">
+                            <h3 className="text-red-600 text-sm sm:text-base mb-3 text-center m-0">
+                                ⚔️ Battle Stats
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                {stats.map((stat, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex justify-between items-center bg-white/60 px-3 py-2 rounded-md text-[clamp(0.6rem,1.5vw,0.75rem)]"
+                                    >
+                                        <span className="text-gray-800 font-bold uppercase">
+                                            {stat.stat.name.split('-').join(' ')}
+                                        </span>
+                                        <span className="text-red-600 font-bold bg-red-600/10 px-2 py-1 rounded">
+                                            {stat.base_stat}
+                                        </span>
                                     </div>
-                                </div>
-                            )}
-
-                            {/* Battle Stats */}
-                            {stats.length > 0 && (
-                                <div style={{
-                                    width: "100%",
-                                    marginTop: "clamp(0.5rem, 2vw, 1rem)",
-                                    backgroundColor: "rgba(255, 255, 255, 0.4)",
-                                    padding: "clamp(0.75rem, 2vw, 1rem)",
-                                    borderRadius: "8px",
-                                    border: "2px solid rgba(220, 38, 38, 0.2)"
-                                }}>
-                                    <h3 style={{
-                                        color: "#dc2626",
-                                        fontSize: "clamp(0.7rem, 2vw, 0.875rem)",
-                                        margin: "0 0 0.75rem 0",
-                                        textAlign: "center"
-                                    }}>⚔️ Battle Stats</h3>
-                                    <div style={{
-                                        display: "grid",
-                                        gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-                                        gap: "clamp(0.4rem, 1vw, 0.5rem)"
-                                    }}>
-                                        {stats.map((stat, index) => (
-                                            <div
-                                                key={index}
-                                                style={{
-                                                    display: "flex",
-                                                    justifyContent: "space-between",
-                                                    alignItems: "center",
-                                                    backgroundColor: "rgba(255, 255, 255, 0.6)",
-                                                    padding: "clamp(0.4rem, 1vw, 0.5rem)",
-                                                    borderRadius: "6px",
-                                                    fontSize: "clamp(0.6rem, 1.5vw, 0.75rem)"
-                                                }}
-                                            >
-                                                <span style={{
-                                                    color: "#1f2937",
-                                                    fontWeight: "bold",
-                                                    textTransform: "uppercase"
-                                                }}>
-                                                    {stat.stat.name.split("-").join(" ")}
-                                                </span>
-                                                <span style={{
-                                                    color: "#dc2626",
-                                                    fontWeight: "bold",
-                                                    backgroundColor: "rgba(220, 38, 38, 0.1)",
-                                                    padding: "clamp(0.2rem, 0.5vw, 0.25rem) clamp(0.4rem, 1vw, 0.5rem)",
-                                                    borderRadius: "4px"
-                                                }}>
-                                                    {stat.base_stat}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
+                                ))}
+                            </div>
                         </div>
                     )}
                 </div>
-
-                {/* Bottom Controls */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "clamp(0.5rem, 2vw, 1rem)",
-                    padding: "clamp(0.5rem, 2vw, 1rem)",
-                    background: "rgba(0,0,0,0.2)",
-                    borderRadius: "clamp(0.5rem, 2vw, 1rem)",
-                    border: "2px solid rgba(0,0,0,0.3)"
-                }}>
-                    {/* Left Control Area */}
-                    <div style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                        alignItems: "center"
-                    }}>
-                        <div style={{
-                            width: "clamp(60px, 15vw, 80px)",
-                            height: "clamp(60px, 15vw, 80px)",
-                            background: "rgba(0,0,0,0.4)",
-                            borderRadius: "50%",
-                            border: "3px solid #333",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "clamp(0.5rem, 1.5vw, 0.7rem)",
-                            color: "white",
-                            fontWeight: "bold"
-                        }}>
-                            D-PAD
-                        </div>
-                    </div>
-
-                    {/* Right Control Area - Back Button */}
-                    <div style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.75rem",
-                        alignItems: "center",
-                        justifyContent: "center"
-                    }}>
-                        <button
-                            onClick={handleBack}
-                            style={{
-                                background: "linear-gradient(135deg, #0099ff 0%, #0066cc 100%)",
-                                border: "3px solid #003366",
-                                color: "white",
-                                width: "clamp(60px, 15vw, 80px)",
-                                height: "clamp(60px, 15vw, 80px)",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                                fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                                fontSize: "clamp(0.5rem, 1.5vw, 0.7rem)",
-                                fontWeight: "bold",
-                                boxShadow: "0 4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3)",
-                                transition: "all 0.2s",
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                gap: "0.25rem",
-                                lineHeight: "1.2"
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = "scale(1.05)";
-                                e.currentTarget.style.boxShadow = "0 6px 12px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.3)";
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = "scale(1)";
-                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3)";
-                            }}
-                        >
-                            <FaChevronLeft style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }} />
-                            <span>Back</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            )}
         </div>
     )
 }

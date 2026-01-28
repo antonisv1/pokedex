@@ -3,8 +3,8 @@ export default function SmallLed(props) {
         <div className="led-indicator font-retro">
             <div 
                 id={props.id} 
-                className="led-dot shadow-lg shadow-current" 
-                style={{ backgroundColor: props.color }}
+                className="led-dot shadow-sm shadow-current" 
+                style={{ backgroundColor: props.color, color: props.color }}
             ></div>
         </div>
     )

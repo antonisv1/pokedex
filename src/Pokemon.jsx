@@ -1,6 +1,5 @@
-import { PageContext} from "./Pokedex";
-import React, {useContext,useState,useEffect} from 'react';
-import { Link } from "react-router-dom";
+import { PageContext } from "./PageContext";
+import {useContext,useState,useEffect} from 'react';
 
 export default function Pokemon(props) {
     const allTypes = [
@@ -33,23 +32,14 @@ export default function Pokemon(props) {
     //const { p } = useParams();
     const {page} = useContext(PageContext);
     const [url,setUrl] = useState("");
-    const [returnUrl,setReturnUrl] = useState("");
-    const [returnAvailable,setReturnAvailable] = useState(true);
     const [name,setName] = useState("");
     const [notFound,setNotFound] = useState(false);
     const [loading,setLoading] = useState(true);
 
-    useEffect(() => {
-     
-      if(page) {
-        setReturnUrl("/"+page);
-      }
-      else {
-        setReturnAvailable(false);
-      }
-      setUrl(`https://pokeapi.co/api/v2/pokemon/${props.name}`);
-      setName(props.name);
-    }, []);
+        useEffect(() => {
+            setUrl(`https://pokeapi.co/api/v2/pokemon/${props.name}`);
+            setName(props.name);
+        }, [page, props.name]);
 
     useEffect(() => {
       
@@ -103,7 +93,7 @@ export default function Pokemon(props) {
                     }}>
                         {/* Loading Animation */}
                         <img 
-                            src="./assets/animation.gif" 
+                            src={`${import.meta.env.BASE_URL}assets/animation.gif`}
                             alt="Loading" 
                             style={{
                                 width: "96px",
@@ -180,10 +170,10 @@ export default function Pokemon(props) {
                     </div>
                 ) : (
                     <div className="retro-card max-w-md text-center bg-gradient-to-br from-red-100/50 to-red-50/50 border-4 border-red-400">
-                        <img src="/assets/pikachu-dancing.gif" alt="Pikachu" className="h-32 mx-auto mb-4" />
+                        <img src={`${import.meta.env.BASE_URL}assets/pikachu-dancing.gif`} alt="Pikachu" className="h-32 mx-auto mb-4" />
                         <h2 className="text-red-600 text-lg mb-2">Not Found!</h2>
                         <p className="text-sm text-gray-700">
-                            Sorry, we couldn't find that Pokémon.
+                            Sorry, we couldn&apos;t find that Pokémon.
                         </p>
                     </div>
                 )}

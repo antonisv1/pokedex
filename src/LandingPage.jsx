@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { FaCheck } from "react-icons/fa6";
 
 export default function LandingPage() {
+    const bgUrl = `${import.meta.env.BASE_URL}assets/bg.png`;
+    const logoUrl = `${import.meta.env.BASE_URL}assets/pokedex-logo.png`;
 
     useEffect(() => {
-        document.body.style.backgroundImage = "url('./assets/bg.png')";
+        document.body.style.backgroundImage = `url('${bgUrl}')`;
         document.body.style.backgroundSize = "cover";
         document.body.style.backgroundPosition = "bottom";
         document.body.style.backgroundAttachment = "fixed";
-    }, [])
+    }, [bgUrl])
 
     return (
-        <div className="min-h-screen w-screen flex flex-col justify-between items-center py-8 px-4 bg-cover bg-bottom bg-fixed" style={{ backgroundImage: "url('./assets/bg.png')" }}>
+        <div className="min-h-screen w-screen flex flex-col justify-between items-center py-8 px-4 bg-cover bg-bottom bg-fixed" style={{ backgroundImage: `url('${bgUrl}')` }}>
             {/* Header - Pokédex Logo */}
             <div className="pt-4">
                 <Link to="/1" title="Start exploring Pokédex">
                     <img 
                         alt="Pokédex Logo" 
-                        src="./assets/pokedex-logo.png" 
+                        src={logoUrl}
                         className="h-24 md:h-32 drop-shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer"
                     />
                 </Link>
@@ -127,10 +130,10 @@ export default function LandingPage() {
                                     fontFamily: '"Press Start 2P", "Pixelade", monospace',
                                     fontSize: "0.875rem"
                                 }}>
-                                    <li>✓ Browse all Pokémon</li>
-                                    <li>✓ Search by name</li>
-                                    <li>✓ View detailed stats</li>
-                                    <li>✓ Smooth navigation</li>
+                                    <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> Browse all Pokémon</li>
+                                    <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> Search by name</li>
+                                    <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> View detailed stats</li>
+                                    <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> Smooth navigation</li>
                                 </ul>
                             </div>
 
@@ -167,7 +170,7 @@ export default function LandingPage() {
             <div className="relative w-full h-32 flex items-end justify-center overflow-hidden">
                 <img 
                     className="h-24 md:h-32 animate-run object-contain" 
-                    src="/assets/pikachu-running.gif" 
+                    src={`${import.meta.env.BASE_URL}assets/pikachu-running.gif`}
                     alt="Pikachu running animation"
                 />
             </div>

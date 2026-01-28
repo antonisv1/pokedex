@@ -53,7 +53,7 @@ export default function NotFound() {
                     <Link style={{ textDecoration: "none", display: "flex", alignItems: "center", flex: "1 1 auto" }} to="/1">
                         <img 
                             alt="Pokedex" 
-                            src="/assets/pokedex-logo.png" 
+                            src={`${import.meta.env.BASE_URL}assets/pokedex-logo.png`}
                             style={{
                                 height: "60px",
                                 maxWidth: "100%",
@@ -125,7 +125,7 @@ export default function NotFound() {
                             wordBreak: "break-word",
                             
                         }}>
-                            Oops! The page you are looking for doesn't exist.
+                            Oops! The page you are looking for doesn&apos;t exist.
                         </p>
                         
                         <p style={{
@@ -138,7 +138,7 @@ export default function NotFound() {
                         </p>
                         
                         <img 
-                            src="/assets/pikachu-dancing.gif" 
+                            src={`${import.meta.env.BASE_URL}assets/pikachu-dancing.gif`}
                             alt="Dancing Pikachu"
                             style={{
                                 width: "120px",

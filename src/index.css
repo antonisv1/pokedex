@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pixelade&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-retro: "Press Start 2P", "Pixelade", monospace;
+}
 
 * {
   box-sizing: border-box;
@@ -161,15 +163,19 @@ p, span, li, button, a {
 }
 
 .led-indicator {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
   border-radius: 50%;
-  border: 2px solid black;
+  border: 3px solid;
+  border-color: #888 #333 #222 #666;
   display: flex;
-  margin: 0.5rem;
-  padding: 0.125rem;
-  background: linear-gradient(to bottom right, rgba(200, 200, 200, 0.8), gray);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: 0.4rem;
+  padding: 0.2rem;
+  background: linear-gradient(145deg, #a0a0a0, #505050);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
   flex-shrink: 0;
 }
 
@@ -178,7 +184,16 @@ p, span, li, button, a {
   height: 100%;
   border-radius: 50%;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  box-shadow: 0 0 4px currentColor, 0 0 8px currentColor;
+  box-shadow:
+    inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    0 0 8px currentColor,
+    0 0 16px currentColor,
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 50%);
+  filter:
+    drop-shadow(0 0 4px currentColor)
+    drop-shadow(0 0 8px currentColor);
 }
 
 #red-led {
@@ -330,13 +345,13 @@ p, span, li, button, a {
 }
 
 .back {
-  background-image: url('./assets/back.png');
+  background-image: url('/assets/back.png');
   background-repeat: no-repeat;
   background-position: left;
   background-size: contain;
 }
 .next {
-  background-image: url('./assets/next.png');
+  background-image: url('/assets/next.png');
   background-repeat: no-repeat;
   background-position: right;
   background-size: contain;

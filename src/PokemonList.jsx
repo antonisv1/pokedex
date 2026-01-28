@@ -1,16 +1,33 @@
-import React , {useState,useEffect,useRef,useContext} from 'react';
-import { useNavigate,Link,useParams } from 'react-router-dom';
+import {useState,useEffect,useRef,useContext,useCallback} from 'react';
 import PokemonCard from './PokemonCard';
-import { PageContext } from './Pokedex';
+import { PageContext } from './PageContext';
 
-export default function PokemonList(props) {
+export default function PokemonList() {
 
     const [pokemonList,setPokemonList] = useState([]);
-    const [count,setCount] = useState(1000);
-    const {page,setPage} = useContext(PageContext);
+    const {page} = useContext(PageContext);
     const fetchPage = useRef(null);
     const [pokemonImages,setPokemonImages] = useState({});
-    const navigate = useNavigate();
+
+    const fetchPokemon = useCallback((pageNumber) => {
+        console.log(pageNumber);
+        let offset=(pageNumber-1)*8;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=8`);
+                const data = await response.json();
+                console.log(data);
+                if (!(data.results[0])) {
+                    const tp = Math.round(data.count/8);
+                    fetchPokemon(tp);
+                }
+                setPokemonList(data.results);
+            } catch (error) {
+               console.log(error.message);
+            }
+        }
+        fetchData();
+    }, []);
 
     useEffect(() => {
         if (!isNaN(page) && page > 0) {
@@ -19,7 +36,7 @@ export default function PokemonList(props) {
                 fetchPage.current = page;
             }
         }
-    }, [page]);
+    }, [page, fetchPokemon]);
     
     useEffect(() => {
         const fetchImageUrls = async () => {
@@ -35,42 +52,15 @@ export default function PokemonList(props) {
         fetchImageUrls();
       }, [pokemonList]);
     
-    function fetchPokemon(pageNumber) {
-        console.log(pageNumber);
-        let offset=(pageNumber-1)*8;
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=8`);
-                const data = await response.json();
-                console.log(data);
-                if (!(data.results[0])) {
-                    const tp = Math.round(data.count/8);
-                    fetchPokemon(tp);
-                }
-                setCount(data.count);      
-                setPokemonList(data.results);
-                
-            } catch (error) {
-               console.log(error.message);
-            }
-        }
-        
-        fetchData();
-    }
-
     return (
-        <div className="w-full flex flex-col items-center justify-start gap-4 font-retro my-2">
+        <div className="w-full flex flex-col items-stretch justify-start font-retro">
             {/* Pokemon Grid */}
-            <div className="w-full pokemon-grid" style={{ 
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: "1rem"
-            }}>
+            <div className="w-full pokemon-grid grid grid-cols-4 gap-3 p-2">
                 {pokemonList.map((pokemon, index) => (
                     <PokemonCard
                         key={index}
                         name={pokemon.name}
-                        src={!(pokemonImages[pokemon.name]) ? "assets/animation.gif" : pokemonImages[pokemon.name]}
+                        src={!(pokemonImages[pokemon.name]) ? `${import.meta.env.BASE_URL}assets/animation.gif` : pokemonImages[pokemon.name]}
                     />
                 ))}
             </div>

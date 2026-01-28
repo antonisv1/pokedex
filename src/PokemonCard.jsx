@@ -1,50 +1,28 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { PageContext } from "./Pokedex";
+import { PageContext } from "./PageContext";
 
 export default function PokemonCard(props) {
    const { page } = useContext(PageContext);
    return (
-    <Link className="no-underline" to={`/${page}/${props.name}`} style={{ textDecoration: "none", color: "inherit" }}>
-        <div 
-            className="flex items-center justify-center rounded-2xl hover:scale-105 transition-all duration-300 cursor-pointer font-retro"
-            style={{
-                gap: "0.5rem",
-                padding: "0.75rem",
-                width: "100%",
-                minHeight: "100px",
-                background: "linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f0abfc 100%)",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2)",
-                fontSize: "0.875rem"
-            }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = "0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3)";
-                e.currentTarget.style.background = "linear-gradient(135deg, #93c5fd 0%, #c4b5fd 50%, #f5d0fe 100%)";
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2)";
-                e.currentTarget.style.background = "linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f0abfc 100%)";
-            }}
+        <Link
+            className="no-underline text-inherit block"
+            to={`/${page}/${props.name}`}
             title={`View ${props.name} details`}
         >
-            <img 
-                src={props.src} 
-                alt={props.name}
-                loading="lazy"
-                className="object-contain hover:scale-110 transition-transform duration-300"
-                style={{
-                    width: "64px",
-                    height: "64px",
-                    flexShrink: 0
-                }}
-            />
-            <span className="font-bold text-center capitalize" style={{ 
-                color: "#000",
-                flex: 1,
-                minWidth: 0,
-                lineHeight: "1.2"
-            }}>{props.name}</span>
-        </div>
-    </Link>
+            <div
+                className="flex items-center gap-2 p-3 w-full min-h-[70px] rounded-lg border-2 border-t-white border-l-white border-r-neutral-300 border-b-neutral-400 bg-gradient-to-b from-white via-neutral-50 to-neutral-100 cursor-pointer font-retro text-[clamp(0.65rem,1.3vw,0.85rem)] shadow-[0_4px_8px_rgba(0,0,0,0.15),0_2px_4px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all hover:shadow-[0_6px_12px_rgba(0,0,0,0.2),0_3px_6px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.9)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[0_2px_4px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(0,0,0,0.08)]"
+            >
+                <img
+                    src={props.src}
+                    alt={props.name}
+                    loading="lazy"
+                    className="w-8 h-8 sm:w-10 sm:h-10 flex-none object-contain"
+                />
+                <span className="flex-1 font-bold capitalize leading-tight text-neutral-800">
+                    {props.name}
+                </span>
+            </div>
+        </Link>
    );
 }

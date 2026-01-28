@@ -1,6 +1,7 @@
 import Pokedex from "./Pokedex" 
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import PokemonInfo from "./PokemonInfo";
+import PokedexLayout from "./PokedexLayout";
 import LandingPage from "./LandingPage";
 import NotFound from "./NotFound";
 
@@ -9,8 +10,10 @@ function App() {
     createRoutesFromElements(    
       <>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/:p" element={<Pokedex />} />
-        <Route path="/:p/:id" element={<PokemonInfo />} />
+        <Route path="/:p" element={<PokedexLayout />}>
+          <Route index element={<Pokedex />} />
+          <Route path=":id" element={<PokemonInfo />} />
+        </Route>
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </>          

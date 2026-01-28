@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { FaVolumeHigh } from 'react-icons/fa6';
+import { FaVolumeHigh, FaStar } from 'react-icons/fa6';
 
 export default function PokemonInfo() {
     const allTypes = [
@@ -29,11 +29,18 @@ export default function PokemonInfo() {
     const [height,setHeight] = useState(0);
     const [weight,setWeight] = useState(0);
     const [image,setImage] = useState("");
+    const [shinyImage, setShinyImage] = useState("");
+    const [isShiny, setIsShiny] = useState(false);
     const [types,setTypes] = useState([]);
     const [abilities,setAbilities] = useState([]);
     const [stats,setStats] = useState([]);
     const [baseExp,setBaseExp] = useState(0);
     const [cry, setCry] = useState("");
+    const [pokemonId, setPokemonId] = useState(0);
+    const [flavorText, setFlavorText] = useState("");
+    const [catchRate, setCatchRate] = useState(0);
+    const [habitat, setHabitat] = useState("");
+    const [generation, setGeneration] = useState("");
     const audioRef = useRef(null);
     const { id } = useParams();
     const navigate = useNavigate();
@@ -63,11 +70,31 @@ export default function PokemonInfo() {
             setHeight(pokemon.height);
             setWeight(pokemon.weight);
             setImage(pokemon.sprites.front_default);
+            setShinyImage(pokemon.sprites.front_shiny);
             setTypes(pokemon.types);
             setAbilities(pokemon.abilities);
             setStats(pokemon.stats);
             setBaseExp(pokemon.base_experience);
             setCry(pokemon.cries?.latest || pokemon.cries?.legacy || "");
+            setPokemonId(pokemon.id);
+            
+            // Fetch species data for additional info
+            if (pokemon.species?.url) {
+                const speciesResponse = await fetch(pokemon.species.url);
+                const speciesData = await speciesResponse.json();
+                
+                // Get English flavor text
+                const englishEntry = speciesData.flavor_text_entries?.find(
+                    entry => entry.language.name === 'en'
+                );
+                if (englishEntry) {
+                    setFlavorText(englishEntry.flavor_text.replace(/\f|\n/g, ' '));
+                }
+                
+                setCatchRate(speciesData.capture_rate || 0);
+                setHabitat(speciesData.habitat?.name || '');
+                setGeneration(speciesData.generation?.name?.replace('generation-', '').toUpperCase() || '');
+            }
             
         } catch (error) {
           setNotFound(true);
@@ -102,15 +129,36 @@ export default function PokemonInfo() {
                     <p className="text-xs text-neutral-800 m-0">Loading...</p>
                 </div>
             ) : (
-                <div className="w-full max-w-3xl rounded-xl border-4 border-t-white/60 border-l-white/40 border-r-neutral-300 border-b-neutral-400 bg-gradient-to-b from-white via-neutral-50 to-neutral-100 p-4 sm:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.2),0_4px_8px_rgba(0,0,0,0.15),inset_0_2px_0_rgba(255,255,255,0.8)]">
+                <div className="w-full max-w-3xl md:rounded-xl md:border-4 md:border-t-white/60 md:border-l-white/40 md:border-r-neutral-300 md:border-b-neutral-400 bg-gradient-to-b from-white via-neutral-50 to-neutral-100 p-4 sm:p-6 md:shadow-[0_8px_24px_rgba(0,0,0,0.2),0_4px_8px_rgba(0,0,0,0.15),inset_0_2px_0_rgba(255,255,255,0.8)]">
                     <div className="flex flex-col items-center gap-4 mb-6">
+                        {/* Pokemon ID Badge */}
+                        {pokemonId > 0 && (
+                            <span className="bg-gradient-to-b from-neutral-700 to-neutral-800 text-white px-3 py-1 rounded-full text-xs font-bold shadow-[0_2px_4px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]">
+                                #{String(pokemonId).padStart(4, '0')}
+                            </span>
+                        )}
+                        
                         {image && (
-                            <div className="rounded-full p-1 bg-gradient-to-br from-neutral-200 via-neutral-300 to-neutral-400 shadow-[0_8px_16px_rgba(0,0,0,0.25),inset_0_2px_4px_rgba(255,255,255,0.5)]">
-                                <img
-                                    alt={`${name} profile`}
-                                    src={image}
-                                    className="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-white to-neutral-100 rounded-full p-2 border-2 border-neutral-200 shadow-[inset_0_4px_8px_rgba(0,0,0,0.1),inset_0_-2px_4px_rgba(255,255,255,0.8)] object-cover"
-                                />
+                            <div className="relative">
+                                <div className={`rounded-full p-1 bg-gradient-to-br ${isShiny ? 'from-yellow-300 via-yellow-400 to-amber-500' : 'from-neutral-200 via-neutral-300 to-neutral-400'} shadow-[0_8px_16px_rgba(0,0,0,0.25),inset_0_2px_4px_rgba(255,255,255,0.5)] transition-all duration-300`}>
+                                    <img
+                                        alt={`${name} ${isShiny ? 'shiny ' : ''}profile`}
+                                        src={isShiny ? shinyImage : image}
+                                        className="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-white to-neutral-100 rounded-full p-2 border-2 border-neutral-200 shadow-[inset_0_4px_8px_rgba(0,0,0,0.1),inset_0_-2px_4px_rgba(255,255,255,0.8)] object-cover"
+                                    />
+                                </div>
+                                {/* Shiny Toggle Button */}
+                                {shinyImage && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsShiny(!isShiny)}
+                                        className={`absolute -bottom-1 -right-1 flex items-center justify-center w-9 h-9 rounded-full border-2 ${isShiny ? 'border-yellow-400 bg-gradient-to-b from-yellow-400 to-amber-500 text-white' : 'border-neutral-300 bg-gradient-to-b from-white to-neutral-200 text-neutral-500'} shadow-[0_3px_6px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.5)] transition-all hover:scale-110`}
+                                        title={isShiny ? 'Show normal' : 'Show shiny'}
+                                        aria-label="Toggle shiny sprite"
+                                    >
+                                        <FaStar className="text-sm" />
+                                    </button>
+                                )}
                             </div>
                         )}
                         <div className="flex items-center gap-3">
@@ -158,7 +206,36 @@ export default function PokemonInfo() {
                         </ul>
                     </div>
 
+                    {/* Flavor Text / Description */}
+                    {flavorText && (
+                        <div className="mb-6 p-4 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-t-amber-100 border-l-amber-100 border-r-amber-200 border-b-amber-300 rounded-xl shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.8)]">
+                            <p className="text-neutral-700 text-[clamp(0.65rem,1.5vw,0.8rem)] leading-relaxed text-center m-0 italic">
+                                "{flavorText}"
+                            </p>
+                        </div>
+                    )}
+
                     <div className="space-y-3">
+                        {/* Generation */}
+                        {generation && (
+                            <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-purple-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
+                                <h3 className="text-purple-600 text-sm m-0">🎮 Generation</h3>
+                                <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                                    {generation}
+                                </span>
+                            </div>
+                        )}
+                        
+                        {/* Habitat */}
+                        {habitat && (
+                            <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-green-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
+                                <h3 className="text-green-600 text-sm m-0">🌍 Habitat</h3>
+                                <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] capitalize">
+                                    {habitat.replace('-', ' ')}
+                                </span>
+                            </div>
+                        )}
+                        
                         <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <h3 className="text-red-600 text-sm m-0">📏 Height</h3>
                             <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
@@ -175,6 +252,16 @@ export default function PokemonInfo() {
                             <h3 className="text-red-600 text-sm m-0">⭐ Base Exp</h3>
                             <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">{baseExp}</span>
                         </div>
+                        
+                        {/* Catch Rate */}
+                        {catchRate > 0 && (
+                            <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-blue-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
+                                <h3 className="text-blue-600 text-sm m-0">🎯 Catch Rate</h3>
+                                <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                                    {catchRate} <span className="text-neutral-500 text-xs">({Math.round(catchRate / 255 * 100)}%)</span>
+                                </span>
+                            </div>
+                        )}
                     </div>
 
                     {abilities.length > 0 && (
@@ -215,6 +302,18 @@ export default function PokemonInfo() {
                                         </span>
                                     </div>
                                 ))}
+                            </div>
+                            
+                            {/* Total Stats */}
+                            <div className="mt-3 pt-3 border-t-2 border-neutral-300">
+                                <div className="flex justify-between items-center bg-gradient-to-r from-neutral-700 to-neutral-800 px-4 py-3 rounded-lg text-[clamp(0.7rem,1.6vw,0.85rem)] border-2 border-t-neutral-600 border-l-neutral-600 border-r-neutral-900 border-b-neutral-950 shadow-[0_4px_8px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.1)]">
+                                    <span className="text-white font-bold uppercase">
+                                        📊 Total
+                                    </span>
+                                    <span className="text-white font-bold bg-gradient-to-b from-amber-400 to-amber-500 px-3 py-1 rounded shadow-[0_2px_4px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.3)]">
+                                        {stats.reduce((sum, stat) => sum + stat.base_stat, 0)}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     )}

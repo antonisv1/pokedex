@@ -27,109 +27,31 @@ export default function LandingPage() {
             </div>
 
             {/* Main Content - Glassmorphism Card */}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flex: 1,
-                width: "100%",
-                maxWidth: "900px",
-                position: "relative"
-            }}>
+            <div className="flex justify-center items-center flex-1 w-full max-w-[900px] relative">
                 {/* Glow background */}
-                <div style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(to right, rgba(200,100,255,0.6), rgba(255,100,200,0.6), rgba(100,100,255,0.6))",
-                    borderRadius: "2rem",
-                    filter: "blur(3rem)",
-                    opacity: 0.4,
-                    zIndex: 0,
-                    pointerEvents: "none"
-                }}></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400/60 via-pink-400/60 to-blue-400/60 rounded-[2rem] blur-[3rem] opacity-40 z-0 pointer-events-none"></div>
 
                 {/* Main card */}
-                <div style={{
-                    position: "relative",
-                    zIndex: 10,
-                    background: "rgba(255, 255, 255, 0.2)",
-                    backdropFilter: "blur(20px)",
-                    border: "2px solid rgba(255, 255, 255, 0.4)",
-                    borderRadius: "2rem",
-                    padding: "2rem 1.5rem",
-                    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-                    width: "90%",
-                    maxWidth: "800px"
-                }}>
+                <div className="relative z-10 bg-white/20 backdrop-blur-xl border-2 border-white/40 rounded-[2rem] p-8 sm:px-6 shadow-[0_8px_32px_rgba(0,0,0,0.3)] w-[90%] max-w-[800px]">
                     {/* Shine effect */}
-                    <div style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "linear-gradient(to bottom right, rgba(255,255,255,0.4), transparent)",
-                        borderRadius: "2rem",
-                        animation: "pulse 2s infinite",
-                        pointerEvents: "none"
-                    }}></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-[2rem] animate-pulse pointer-events-none"></div>
 
                     {/* Content */}
-                    <div style={{
-                        position: "relative",
-                        zIndex: 20,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        textAlign: "center",
-                        gap: "2rem"
-                    }}>
-                        <h1 style={{
-                            fontSize: "2.5rem",
-                            color: "#dc2626",
-                            textShadow: "0 4px 6px rgba(0,0,0,0.2)",
-                            animation: "bounce 1s infinite",
-                            margin: 0,
-                            fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                            letterSpacing: "0.1em"
-                        }}>
+                    <div className="relative z-20 flex flex-col items-center text-center gap-8">
+                        <h1 className="text-4xl text-red-600 drop-shadow-[0_4px_6px_rgba(0,0,0,0.2)] animate-bounce m-0 font-retro tracking-[0.1em]">
                             Welcome!
                         </h1>
 
-                        <div style={{ space: "1.5rem" }}>
-                            <p style={{
-                                fontSize: "1.125rem",
-                                lineHeight: "1.6",
-                                fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                                marginBottom: "1.5rem"
-                            }}>
+                        <div className="space-y-6">
+                            <p className="text-lg leading-relaxed font-retro mb-6">
                                 This is an Interactive Pokédex built with React.js and the PokeAPI.
                             </p>
 
-                            <div style={{
-                                background: "rgba(255, 255, 255, 0.3)",
-                                backdropFilter: "blur(8px)",
-                                borderRadius: "1.5rem",
-                                padding: "1.5rem",
-                                border: "1px solid rgba(255, 255, 255, 0.5)",
-                                marginBottom: "1.5rem"
-                            }}>
-                                <p style={{
-                                    fontWeight: "bold",
-                                    color: "#dc2626",
-                                    marginBottom: "1rem",
-                                    fontSize: "1.125rem",
-                                    fontFamily: '"Press Start 2P", "Pixelade", monospace'
-                                }}>Features:</p>
-                                <ul style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    gap: "0.5rem",
-                                    listStyle: "none",
-                                    padding: 0,
-                                    margin: 0,
-                                    color: "#1f2937",
-                                    fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                                    fontSize: "0.875rem"
-                                }}>
+                            <div className="bg-white/30 backdrop-blur-lg rounded-3xl p-6 border border-white/50 mb-6">
+                                <p className="font-bold text-red-600 mb-4 text-lg font-retro">
+                                    Features:
+                                </p>
+                                <ul className="flex flex-col items-center gap-2 list-none p-0 m-0 text-gray-800 font-retro text-sm">
                                     <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> Browse all Pokémon</li>
                                     <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> Search by name</li>
                                     <li className="flex items-center"><FaCheck className="text-red-600 mr-2 h-5 w-5" /> View detailed stats</li>
@@ -138,26 +60,7 @@ export default function LandingPage() {
                             </div>
 
                             <Link to="/1">
-                                <button style={{
-                                    background: "linear-gradient(135deg, #cc0000, #ff0000)",
-                                    color: "white",
-                                    border: "none",
-                                    padding: "0.75rem 2rem",
-                                    fontSize: "1rem",
-                                    borderRadius: "0.5rem",
-                                    cursor: "pointer",
-                                    fontFamily: '"Press Start 2P", "Pixelade", monospace',
-                                    fontWeight: "bold",
-                                    boxShadow: "0 4px 12px rgba(220, 38, 38, 0.4)",
-                                    transition: "all 0.3s ease",
-                                    letterSpacing: "0.05em"
-                                }} onMouseEnter={(e) => {
-                                    e.target.style.transform = "scale(1.05)";
-                                    e.target.style.boxShadow = "0 6px 16px rgba(220, 38, 38, 0.6)";
-                                }} onMouseLeave={(e) => {
-                                    e.target.style.transform = "scale(1)";
-                                    e.target.style.boxShadow = "0 4px 12px rgba(220, 38, 38, 0.4)";
-                                }}>
+                                <button className="bg-gradient-to-br from-red-700 to-red-600 text-white border-none py-3 px-8 text-base rounded-lg cursor-pointer font-retro font-bold shadow-[0_4px_12px_rgba(220,38,38,0.4)] transition-all duration-300 tracking-wider hover:scale-105 hover:shadow-[0_6px_16px_rgba(220,38,38,0.6)]">
                                     Explore Pokémon!
                                 </button>
                             </Link>
@@ -176,14 +79,6 @@ export default function LandingPage() {
             </div>
 
             <style>{`
-                @keyframes bounce {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-10px); }
-                }
-                @keyframes pulse {
-                    0%, 100% { opacity: 0.5; }
-                    50% { opacity: 1; }
-                }
                 @keyframes run {
                     0% { transform: translateX(-50%); }
                     30% { transform: translateX(30%); }

@@ -131,7 +131,7 @@ export default function PokemonInfo() {
                                             <img
                                                 src={matchingType.url}
                                                 alt={slot.type.name}
-                                                className="w-[clamp(60px,15vw,96px)] h-auto bg-gradient-to-b from-white to-neutral-100 p-1.5 rounded-lg border-2 border-t-white border-l-white border-r-neutral-300 border-b-neutral-400 shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)]"
+                                                className="w-[clamp(60px,15vw,96px)] h-auto  shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)]"
                                             />
                                         )}
                                     </li>

@@ -98,22 +98,24 @@ export default function PokemonInfo() {
                     <p className="text-xs text-neutral-800 m-0">Loading...</p>
                 </div>
             ) : (
-                <div className="w-full max-w-3xl retro-card">
+                <div className="w-full max-w-3xl rounded-xl border-4 border-t-white/60 border-l-white/40 border-r-neutral-300 border-b-neutral-400 bg-gradient-to-b from-white via-neutral-50 to-neutral-100 p-4 sm:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.2),0_4px_8px_rgba(0,0,0,0.15),inset_0_2px_0_rgba(255,255,255,0.8)]">
                     <div className="flex flex-col items-center gap-4 mb-6">
                         {image && (
-                            <img
-                                alt={`${name} profile`}
-                                src={image}
-                                className="w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-full p-2 border-4 border-gray-300 shadow-lg object-cover"
-                            />
+                            <div className="rounded-full p-1 bg-gradient-to-br from-neutral-200 via-neutral-300 to-neutral-400 shadow-[0_8px_16px_rgba(0,0,0,0.25),inset_0_2px_4px_rgba(255,255,255,0.5)]">
+                                <img
+                                    alt={`${name} profile`}
+                                    src={image}
+                                    className="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-white to-neutral-100 rounded-full p-2 border-2 border-neutral-200 shadow-[inset_0_4px_8px_rgba(0,0,0,0.1),inset_0_-2px_4px_rgba(255,255,255,0.8)] object-cover"
+                                />
+                            </div>
                         )}
-                        <h1 className="text-red-600 text-xl sm:text-2xl font-bold capitalize m-0">
+                        <h1 className="text-red-600 text-xl sm:text-2xl font-bold capitalize m-0 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]">
                             {name}
                         </h1>
                     </div>
 
                     <div className="mb-6 text-center">
-                        <h3 className="text-red-600 text-sm sm:text-base mb-3 m-0">Types</h3>
+                        <h3 className="text-red-600 text-sm sm:text-base mb-3 m-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">Types</h3>
                         <ul className="flex flex-wrap justify-center gap-3 list-none p-0 m-0">
                             {types.map((slot, index) => {
                                 const matchingType = allTypes.find(
@@ -122,14 +124,14 @@ export default function PokemonInfo() {
                                 return (
                                     <li
                                         key={index}
-                                        className="transition-transform hover:scale-110"
+                                        className="transition-all hover:scale-110 hover:-translate-y-1"
                                         title={slot.type.name}
                                     >
                                         {matchingType && (
                                             <img
                                                 src={matchingType.url}
                                                 alt={slot.type.name}
-                                                className="w-[clamp(60px,15vw,96px)] h-auto bg-white p-1 rounded-lg border-2 border-gray-300 shadow-md"
+                                                className="w-[clamp(60px,15vw,96px)] h-auto bg-gradient-to-b from-white to-neutral-100 p-1.5 rounded-lg border-2 border-t-white border-l-white border-r-neutral-300 border-b-neutral-400 shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)]"
                                             />
                                         )}
                                     </li>
@@ -139,34 +141,34 @@ export default function PokemonInfo() {
                     </div>
 
                     <div className="space-y-3">
-                        <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
+                        <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <h3 className="text-red-600 text-sm m-0">📏 Height</h3>
-                            <span className="text-gray-800 font-bold text-sm">
+                            <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                                 {addDecimalPoint(height)} m
                             </span>
                         </div>
-                        <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
+                        <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <h3 className="text-red-600 text-sm m-0">⚖️ Weight</h3>
-                            <span className="text-gray-800 font-bold text-sm">
+                            <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                                 {addDecimalPoint(weight)} kg
                             </span>
                         </div>
-                        <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
+                        <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
                             <h3 className="text-red-600 text-sm m-0">⭐ Base Exp</h3>
-                            <span className="text-gray-800 font-bold text-sm">{baseExp}</span>
+                            <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">{baseExp}</span>
                         </div>
                     </div>
 
                     {abilities.length > 0 && (
                         <div className="w-full mt-5">
-                            <h3 className="text-red-600 text-sm sm:text-base mb-2 text-center m-0">
+                            <h3 className="text-red-600 text-sm sm:text-base mb-2 text-center m-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">
                                 🎯 Abilities
                             </h3>
                             <div className="flex flex-wrap justify-center gap-2">
                                 {abilities.map((ability, index) => (
                                     <span
                                         key={index}
-                                        className="bg-red-600/10 text-red-600 border border-red-600 rounded-md px-3 py-2 text-[clamp(0.6rem,1.5vw,0.7rem)] font-bold capitalize"
+                                        className="bg-gradient-to-b from-red-500 to-red-600 text-white border-2 border-t-red-400 border-l-red-400 border-r-red-700 border-b-red-800 rounded-lg px-3 py-2 text-[clamp(0.6rem,1.5vw,0.7rem)] font-bold capitalize shadow-[0_3px_6px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_5px_10px_rgba(0,0,0,0.25)]"
                                     >
                                         {ability.ability.name}
                                         {ability.is_hidden && ' (H)'}
@@ -177,20 +179,20 @@ export default function PokemonInfo() {
                     )}
 
                     {stats.length > 0 && (
-                        <div className="w-full mt-5 bg-white/40 border-2 border-red-600/20 rounded-lg p-4">
-                            <h3 className="text-red-600 text-sm sm:text-base mb-3 text-center m-0">
+                        <div className="w-full mt-5 bg-gradient-to-b from-white/60 to-neutral-100/60 border-2 border-t-white border-l-white border-r-neutral-300 border-b-neutral-400 rounded-xl p-4 shadow-[0_4px_8px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.8)]">
+                            <h3 className="text-red-600 text-sm sm:text-base mb-3 text-center m-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">
                                 ⚔️ Battle Stats
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 {stats.map((stat, index) => (
                                     <div
                                         key={index}
-                                        className="flex justify-between items-center bg-white/60 px-3 py-2 rounded-md text-[clamp(0.6rem,1.5vw,0.75rem)]"
+                                        className="flex justify-between items-center bg-gradient-to-r from-white to-neutral-50 px-3 py-2 rounded-lg text-[clamp(0.6rem,1.5vw,0.75rem)] border border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 shadow-[0_2px_4px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)]"
                                     >
                                         <span className="text-gray-800 font-bold uppercase">
                                             {stat.stat.name.split('-').join(' ')}
                                         </span>
-                                        <span className="text-red-600 font-bold bg-red-600/10 px-2 py-1 rounded">
+                                        <span className="text-white font-bold bg-gradient-to-b from-red-500 to-red-600 px-2 py-1 rounded shadow-[0_2px_4px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.2)]">
                                             {stat.base_stat}
                                         </span>
                                     </div>

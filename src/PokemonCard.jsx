@@ -17,7 +17,7 @@ export default function PokemonCard(props) {
                     src={props.src}
                     alt={props.name}
                     loading="lazy"
-                    className="w-8 h-8 sm:w-10 sm:h-10 flex-none object-contain"
+                    className="w-12 h-12 sm:w-14 sm:h-14 flex-none object-cover"
                 />
                 <span className="flex-1 font-bold capitalize leading-tight text-neutral-800">
                     {props.name}

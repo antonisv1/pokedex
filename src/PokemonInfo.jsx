@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import { FaVolumeHigh } from 'react-icons/fa6';
 
 export default function PokemonInfo() {
     const allTypes = [
@@ -32,6 +33,8 @@ export default function PokemonInfo() {
     const [abilities,setAbilities] = useState([]);
     const [stats,setStats] = useState([]);
     const [baseExp,setBaseExp] = useState(0);
+    const [cry, setCry] = useState("");
+    const audioRef = useRef(null);
     const { id } = useParams();
     const navigate = useNavigate();
     const [url,setUrl] = useState("");
@@ -64,6 +67,7 @@ export default function PokemonInfo() {
             setAbilities(pokemon.abilities);
             setStats(pokemon.stats);
             setBaseExp(pokemon.base_experience);
+            setCry(pokemon.cries?.latest || pokemon.cries?.legacy || "");
             
         } catch (error) {
           setNotFound(true);
@@ -109,9 +113,23 @@ export default function PokemonInfo() {
                                 />
                             </div>
                         )}
-                        <h1 className="text-red-600 text-xl sm:text-2xl font-bold capitalize m-0 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]">
-                            {name}
-                        </h1>
+                        <div className="flex items-center gap-3">
+                            <h1 className="text-red-600 text-xl sm:text-2xl font-bold capitalize m-0 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]">
+                                {name}
+                            </h1>
+                            {cry && (
+                                <button
+                                    type="button"
+                                    onClick={() => audioRef.current?.play()}
+                                    className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-t-neutral-200 border-l-neutral-200 border-r-neutral-400 border-b-neutral-500 bg-gradient-to-b from-white via-neutral-100 to-neutral-200 text-red-600 shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_12px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-[0_2px_4px_rgba(0,0,0,0.15),inset_0_2px_4px_rgba(0,0,0,0.1)]"
+                                    title="Play cry"
+                                    aria-label="Play Pokemon cry"
+                                >
+                                    <FaVolumeHigh className="text-lg" />
+                                </button>
+                            )}
+                        </div>
+                        {cry && <audio ref={audioRef} src={cry} preload="auto" />}
                     </div>
 
                     <div className="mb-6 text-center">

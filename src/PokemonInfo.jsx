@@ -182,7 +182,7 @@ export default function PokemonInfo() {
 
                     <div className="mb-6 text-center">
                         <h3 className="text-red-600 text-sm sm:text-base mb-3 m-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">Types</h3>
-                        <ul className="flex flex-wrap justify-center gap-3 list-none p-0 m-0">
+                        <ul className="flex justify-center items-center gap-3 list-none p-0 m-0">
                             {types.map((slot, index) => {
                                 const matchingType = allTypes.find(
                                     (type) => type.type === slot.type.name
@@ -197,7 +197,7 @@ export default function PokemonInfo() {
                                             <img
                                                 src={matchingType.url}
                                                 alt={slot.type.name}
-                                                className="w-[clamp(60px,15vw,96px)] h-auto  shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)]"
+                                                className="w-auto h-auto shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)]"
                                             />
                                         )}
                                     </li>

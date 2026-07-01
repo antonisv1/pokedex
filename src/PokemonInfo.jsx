@@ -4,24 +4,24 @@ import { FaVolumeHigh, FaStar } from 'react-icons/fa6';
 
 export default function PokemonInfo() {
     const allTypes = [
-        {type:"normal",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/1.png"},
-        {type:"fighting",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/2.png"},
-        {type:"flying",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/3.png"},
-        {type:"poison",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/4.png"},
-        {type:"ground",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/5.png"},
-        {type:"rock",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/6.png"},
-        {type:"bug",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/7.png"},
-        {type:"ghost",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/8.png"},
-        {type:"steel",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/9.png"},
-        {type:"fire",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/10.png"},
-        {type:"water",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/11.png"},
-        {type:"grass",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/12.png"},
-        {type:"electric",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/13.png"},
-        {type:"psychic",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/14.png"},
-        {type:"ice",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/15.png"},
-        {type:"dragon",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/16.png"},
-        {type:"dark",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/17.png"},
-        {type:"fairy",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/18.png"},
+        {type:"normal",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/1.png"},
+        {type:"fighting",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/2.png"},
+        {type:"flying",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/3.png"},
+        {type:"poison",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/4.png"},
+        {type:"ground",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/5.png"},
+        {type:"rock",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/6.png"},
+        {type:"bug",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/7.png"},
+        {type:"ghost",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/8.png"},
+        {type:"steel",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/9.png"},
+        {type:"fire",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/10.png"},
+        {type:"water",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/11.png"},
+        {type:"grass",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/12.png"},
+        {type:"electric",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/13.png"},
+        {type:"psychic",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/14.png"},
+        {type:"ice",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/15.png"},
+        {type:"dragon",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/16.png"},
+        {type:"dark",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/17.png"},
+        {type:"fairy",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-shining-pearl/18.png"},
         {type:"stellar",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/19.png"},
         {type:"unknown",url:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-iv/platinum/10001.png"}
     ];
@@ -168,7 +168,7 @@ export default function PokemonInfo() {
                             {cry && (
                                 <button
                                     type="button"
-                                    onClick={() => audioRef.current?.play()}
+                                    onClick={() => { if (audioRef.current) { audioRef.current.currentTime = 0; audioRef.current.play().catch(() => {}); } }}
                                     className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-t-neutral-200 border-l-neutral-200 border-r-neutral-400 border-b-neutral-500 bg-gradient-to-b from-white via-neutral-100 to-neutral-200 text-red-600 shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_12px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-[0_2px_4px_rgba(0,0,0,0.15),inset_0_2px_4px_rgba(0,0,0,0.1)]"
                                     title="Play cry"
                                     aria-label="Play Pokemon cry"
@@ -219,8 +219,8 @@ export default function PokemonInfo() {
                         {/* Generation */}
                         {generation && (
                             <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-purple-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
-                                <h3 className="text-purple-600 text-sm m-0">🎮 Generation</h3>
-                                <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                                <h3 className="text-purple-600 text-sm m-0">Generation</h3>
+                                <span className="text-gray-800 text-center font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                                     {generation}
                                 </span>
                             </div>
@@ -229,35 +229,35 @@ export default function PokemonInfo() {
                         {/* Habitat */}
                         {habitat && (
                             <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-green-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
-                                <h3 className="text-green-600 text-sm m-0">🌍 Habitat</h3>
-                                <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] capitalize">
+                                <h3 className="text-green-600 text-sm m-0">Habitat</h3>
+                                <span className="text-gray-800 text-center font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] capitalize">
                                     {habitat.replace('-', ' ')}
                                 </span>
                             </div>
                         )}
                         
                         <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
-                            <h3 className="text-red-600 text-sm m-0">📏 Height</h3>
-                            <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                            <h3 className="text-red-600 text-sm m-0">Height</h3>
+                            <span className="text-gray-800 text-center font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                                 {addDecimalPoint(height)} m
                             </span>
                         </div>
                         <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
-                            <h3 className="text-red-600 text-sm m-0">⚖️ Weight</h3>
-                            <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                            <h3 className="text-red-600 text-sm m-0">Weight</h3>
+                            <span className="text-gray-800 text-center font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                                 {addDecimalPoint(weight)} kg
                             </span>
                         </div>
                         <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-red-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
-                            <h3 className="text-red-600 text-sm m-0">⭐ Base Exp</h3>
-                            <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">{baseExp}</span>
+                            <h3 className="text-red-600 text-sm m-0">Base Exp</h3>
+                            <span className="text-gray-800 text-center font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">{baseExp}</span>
                         </div>
                         
                         {/* Catch Rate */}
                         {catchRate > 0 && (
                             <div className="flex justify-between items-center bg-gradient-to-r from-white via-neutral-50 to-neutral-100 p-3 rounded-lg border-2 border-t-white border-l-white border-r-neutral-200 border-b-neutral-300 border-l-4 border-l-blue-500 shadow-[0_3px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
-                                <h3 className="text-blue-600 text-sm m-0">🎯 Catch Rate</h3>
-                                <span className="text-gray-800 font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                                <h3 className="text-blue-600 text-sm m-0">Catch Rate</h3>
+                                <span className="text-gray-800 text-center font-bold text-sm bg-white/80 px-2 py-1 rounded shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                                     {catchRate} <span className="text-neutral-500 text-xs">({Math.round(catchRate / 255 * 100)}%)</span>
                                 </span>
                             </div>
@@ -267,7 +267,7 @@ export default function PokemonInfo() {
                     {abilities.length > 0 && (
                         <div className="w-full mt-5">
                             <h3 className="text-red-600 text-sm sm:text-base mb-2 text-center m-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">
-                                🎯 Abilities
+                                Abilities
                             </h3>
                             <div className="flex flex-wrap justify-center gap-2">
                                 {abilities.map((ability, index) => (
@@ -308,7 +308,7 @@ export default function PokemonInfo() {
                             <div className="mt-3 pt-3 border-t-2 border-neutral-300">
                                 <div className="flex justify-between items-center bg-gradient-to-r from-neutral-700 to-neutral-800 px-4 py-3 rounded-lg text-[clamp(0.7rem,1.6vw,0.85rem)] border-2 border-t-neutral-600 border-l-neutral-600 border-r-neutral-900 border-b-neutral-950 shadow-[0_4px_8px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.1)]">
                                     <span className="text-white font-bold uppercase">
-                                        📊 Total
+                                        Total
                                     </span>
                                     <span className="text-white font-bold bg-gradient-to-b from-amber-400 to-amber-500 px-3 py-1 rounded shadow-[0_2px_4px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.3)]">
                                         {stats.reduce((sum, stat) => sum + stat.base_stat, 0)}

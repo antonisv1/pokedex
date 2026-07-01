@@ -155,13 +155,13 @@ export default function Pokemon(props) {
                         {/* Stats */}
                         <div className="space-y-3">
                             <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
-                                <h3 className="text-red-600 text-sm">📏 Height</h3>
+                                <h3 className="text-red-600 text-sm">Height</h3>
                                 <span className="text-gray-800 font-bold">
                                     {addDecimalPoint(height)} m
                                 </span>
                             </div>
                             <div className="flex justify-between items-center bg-white/60 p-3 rounded-lg border-l-4 border-red-600">
-                                <h3 className="text-red-600 text-sm">⚖️ Weight</h3>
+                                <h3 className="text-red-600 text-sm">Weight</h3>
                                 <span className="text-gray-800 font-bold">
                                     {addDecimalPoint(weight)} kg
                                 </span>

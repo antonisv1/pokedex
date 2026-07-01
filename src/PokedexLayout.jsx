@@ -83,7 +83,6 @@ export default function PokedexLayout() {
           <div className="bg-gradient-to-b from-red-400 via-red-500 to-red-600 px-4 sm:px-6 py-3 sm:py-4 border-t-2 border-red-300/40 shadow-[inset_0_2px_0_rgba(255,255,255,0.15)]">
             <div className="grid grid-cols-2 gap-3 sm:gap-4 p-2 sm:p-3">
               <div className="flex items-center justify-start">
-                <div className="rounded-xl border-4 border-t-neutral-600 border-l-neutral-600 border-r-neutral-950 border-b-neutral-950 bg-gradient-to-br from-neutral-700 via-neutral-800 to-neutral-900 p-2 shadow-[0_8px_16px_rgba(0,0,0,0.5),0_4px_6px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]">
                   <DPad
                     screenRef={screenRef}
                     onLeft={() => {
@@ -99,7 +98,6 @@ export default function PokedexLayout() {
                       }
                     }}
                   />
-                </div>
               </div>
 
               <div className="flex items-center justify-end gap-2 sm:gap-3 flex-wrap">

@@ -21,8 +21,8 @@ export default function DPad({
 
   const sizeStyle = useMemo(
     () => ({
-      width: 'clamp(112px, 20vw, 140px)',
-      height: 'clamp(112px, 20vw, 140px)',
+      width: 'clamp(150px, 26vw, 190px)',
+      height: 'clamp(150px, 26vw, 190px)',
     }),
     [],
   );
@@ -71,7 +71,7 @@ export default function DPad({
   const buttonBase = {
     border: '2px solid',
     borderColor: '#444 #1a1a1a #111 #333',
-    background: 'linear-gradient(145deg, #2d2d2d, #1a1a1a)',
+    background: 'linear-gradient(145deg, #353535, #1f1f1f)',
     color: 'white',
     display: 'flex',
     alignItems: 'center',
@@ -117,6 +117,8 @@ export default function DPad({
     onPointerCancel: () => setActive(null),
   };
 
+  const crossMask = "url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='white' d='M 30 10 Q 30 0 40 0 H 60 Q 70 0 70 10 V 30 H 90 Q 100 30 100 40 V 60 Q 100 70 90 70 H 70 V 90 Q 70 100 60 100 H 40 Q 30 100 30 90 V 70 H 10 Q 0 70 0 60 V 40 Q 0 30 10 30 H 30 Z'/></svg>\")"
+
   return (
     <div
       aria-label="D-pad"
@@ -128,14 +130,17 @@ export default function DPad({
         gridTemplateColumns: '1fr 1fr 1fr',
         gridTemplateRows: '1fr 1fr 1fr',
         gap: '4px',
-        padding: '6px',
-        borderRadius: '16px',
+        padding: '8px',
         background: 'linear-gradient(145deg, #3a3a3a, #1a1a1a)',
-        border: '3px solid',
-        borderColor: '#555 #222 #111 #444',
-        boxShadow: '0 6px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.3)',
-        overflow: 'hidden',
+        boxShadow: '0 6px 16px rgba(0,0,0,0.5)',
+        maskImage: crossMask,
+        WebkitMaskImage: crossMask,
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
         fontSize: 'clamp(14px, 2.2vw, 20px)',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
       }}
     >
       <div />
@@ -182,18 +187,7 @@ export default function DPad({
           {centerContent}
         </button>
       ) : (
-        <div
-          aria-hidden="true"
-          style={{
-            borderRadius: '10px',
-            background:
-              'linear-gradient(145deg, #353535, #1f1f1f)',
-            border: '2px solid',
-            borderColor: '#444 #1a1a1a #111 #333',
-            boxShadow:
-              '0 4px 8px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)',
-          }}
-        />
+        <div aria-hidden="true" />
       )}
 
       <button

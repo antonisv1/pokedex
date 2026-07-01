@@ -154,7 +154,7 @@ export default function PokedexLayout() {
                           navigate(`/${page - 1}`);
                         }
                       }}
-                      className={`${navButtonClass} h-[60px] w-[60px] sm:h-[72px] sm:w-[72px]`}
+                      className={`${navButtonClass} h-[60px] w-[60px] sm:h-[72px] sm:w-[72px] text-slate-400`}
                     >
                       B
                     </button>
@@ -168,7 +168,7 @@ export default function PokedexLayout() {
                       onClick={() => {
                         if (!isInfo && !nextButtonDisabled) navigate(`/${page + 1}`);
                       }}
-                      className={`${navButtonClass} h-[68px] w-[68px] sm:h-[84px] sm:w-[84px]`}
+                      className={`${navButtonClass} h-[68px] w-[68px] sm:h-[84px] sm:w-[84px] text-slate-400`}
                     >
                       A
                     </button>

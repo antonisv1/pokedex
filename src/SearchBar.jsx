@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
-export default function SearchBar() {
+export default function SearchBar({ inputRef = null }) {
 
     const [pokemonName, setPokemonName] = useState("");
     const navigate = useNavigate();
@@ -30,6 +30,7 @@ export default function SearchBar() {
     return (
         <div className="flex items-stretch w-full max-w-[320px] rounded-lg border-3 border-t-neutral-300 border-l-neutral-300 border-r-neutral-500 border-b-neutral-600 bg-gradient-to-b from-sky-100 to-sky-200 shadow-[0_4px_8px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.7)] overflow-hidden">
             <input
+                ref={inputRef}
                 type="text"
                 placeholder="Search Pokémon"
                 value={pokemonName}

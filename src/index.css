@@ -978,3 +978,41 @@ p, span, li, button, a {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
+
+@keyframes speaker-grill-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scaleY(1) scaleX(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleY(1.5) scaleX(1.08);
+  }
+}
+
+@keyframes speaker-grill-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes speaker-wave {
+  0% {
+    opacity: 0.9;
+    transform: translateY(-50%) scale(0.75);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(1.35);
+  }
+}

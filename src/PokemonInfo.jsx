@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { FaVolumeHigh, FaStar } from 'react-icons/fa6';
 
 export default function PokemonInfo() {
@@ -44,6 +44,8 @@ export default function PokemonInfo() {
     const audioRef = useRef(null);
     const { id } = useParams();
     const navigate = useNavigate();
+    const outletContext = useOutletContext();
+    const setSpeakerActive = outletContext?.setSpeakerActive;
     const [url,setUrl] = useState("");
     const [name,setName] = useState("");
     const [notFound,setNotFound] = useState(false);
@@ -107,6 +109,20 @@ export default function PokemonInfo() {
     }
     }, [url]);
 
+        useEffect(() => {
+                setSpeakerActive?.(false);
+        }, [cry, setSpeakerActive]);
+
+        useEffect(() => {
+                return () => {
+                        if (audioRef.current) {
+                                audioRef.current.pause();
+                                audioRef.current.currentTime = 0;
+                        }
+                        setSpeakerActive?.(false);
+                };
+        }, [setSpeakerActive]);
+
     function addDecimalPoint(n) {
       let number = parseInt(n);
       if (number >= 10) {
@@ -116,6 +132,16 @@ export default function PokemonInfo() {
         return "0."+number;
       }
     }
+
+        function handlePlayCry() {
+                if (!audioRef.current) return;
+
+                audioRef.current.currentTime = 0;
+                setSpeakerActive?.(true);
+                audioRef.current.play().catch(() => {
+                        setSpeakerActive?.(false);
+                });
+        }
 
     return (
         <div className="w-full flex flex-col items-center font-retro">
@@ -168,7 +194,7 @@ export default function PokemonInfo() {
                             {cry && (
                                 <button
                                     type="button"
-                                    onClick={() => { if (audioRef.current) { audioRef.current.currentTime = 0; audioRef.current.play().catch(() => {}); } }}
+                                    onClick={handlePlayCry}
                                     className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-t-neutral-200 border-l-neutral-200 border-r-neutral-400 border-b-neutral-500 bg-gradient-to-b from-white via-neutral-100 to-neutral-200 text-red-600 shadow-[0_4px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_12px_rgba(0,0,0,0.25)] active:translate-y-0.5 active:shadow-[0_2px_4px_rgba(0,0,0,0.15),inset_0_2px_4px_rgba(0,0,0,0.1)]"
                                     title="Play cry"
                                     aria-label="Play Pokemon cry"
@@ -177,7 +203,16 @@ export default function PokemonInfo() {
                                 </button>
                             )}
                         </div>
-                        {cry && <audio ref={audioRef} src={cry} preload="auto" />}
+                        {cry && (
+                            <audio
+                                ref={audioRef}
+                                src={cry}
+                                preload="auto"
+                                onPlay={() => setSpeakerActive?.(true)}
+                                onPause={() => setSpeakerActive?.(false)}
+                                onEnded={() => setSpeakerActive?.(false)}
+                            />
+                        )}
                     </div>
 
                     <div className="mb-6 text-center">

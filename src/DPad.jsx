@@ -64,8 +64,9 @@ export default function DPad({
 
   const buttonBase = {
     border: '2px solid',
-    borderColor: '#515151 #1a1a1a #101010 #2c2c2c',
-    background: 'linear-gradient(180deg, #3b3b3b 0%, #2b2b2b 55%, #1d1d1d 100%)',
+    borderColor: '#686868 #202020 #0a0a0a #353535',
+    background:
+      'radial-gradient(140% 90% at 50% 0%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 28%, transparent 52%), linear-gradient(180deg, #4a4a4a 0%, #353535 18%, #272727 56%, #161616 100%), radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.24) 0%, transparent 58%)',
     color: 'white',
     position: 'absolute',
     display: 'flex',
@@ -74,7 +75,7 @@ export default function DPad({
     padding: 0,
     lineHeight: 1,
     boxShadow:
-      '0 5px 10px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -2px 3px rgba(0,0,0,0.32)',
+      '0 8px 14px rgba(0,0,0,0.34), 0 2px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.24), inset 0 3px 4px rgba(255,255,255,0.06), inset 0 -4px 7px rgba(0,0,0,0.44)',
     transition: 'transform 0.06s ease, filter 0.12s ease, box-shadow 0.12s ease',
     userSelect: 'none',
     touchAction: 'none',
@@ -83,10 +84,10 @@ export default function DPad({
   };
 
   const activeStyle = {
-    filter: 'brightness(1.1)',
+    filter: 'brightness(0.96)',
     boxShadow:
-      'inset 0 3px 8px rgba(0,0,0,0.62), 0 1px 2px rgba(0,0,0,0.24)',
-    borderColor: '#333 #333 #444 #333',
+      '0 2px 4px rgba(0,0,0,0.24), inset 0 4px 10px rgba(0,0,0,0.64), inset 0 1px 0 rgba(255,255,255,0.08)',
+    borderColor: '#353535 #2a2a2a #464646 #2f2f2f',
   };
 
   const pressedTransforms = {
@@ -200,9 +201,10 @@ export default function DPad({
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(145deg, #3a3a3a, #1a1a1a)',
+          background:
+            'radial-gradient(120% 85% at 50% 2%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 28%, transparent 52%), linear-gradient(145deg, #454545 0%, #262626 42%, #161616 100%), radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.32) 0%, transparent 60%)',
           boxShadow:
-            '0 8px 18px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.28)',
+            '0 10px 22px rgba(0,0,0,0.4), 0 3px 0 rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 5px 10px rgba(255,255,255,0.02), inset 0 -6px 10px rgba(0,0,0,0.42)',
           maskImage: crossMaskUrl,
           WebkitMaskImage: crossMaskUrl,
           maskSize: '100% 100%',
@@ -252,7 +254,11 @@ export default function DPad({
             width: '26%',
             height: '26%',
             borderRadius: '999px',
-            background: 'linear-gradient(180deg, rgba(74,74,74,0.92), rgba(26,26,26,0.96))',
+            borderColor: '#707070 #232323 #0b0b0b #393939',
+            background:
+              'radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0.05) 32%, transparent 52%), linear-gradient(180deg, rgba(88,88,88,0.96), rgba(28,28,28,0.98)), radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.26) 0%, transparent 60%)',
+            boxShadow:
+              '0 7px 12px rgba(0,0,0,0.34), 0 2px 0 rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -4px 7px rgba(0,0,0,0.44)',
             zIndex: 3,
             ...(active === 'center'
               ? {
@@ -280,9 +286,10 @@ export default function DPad({
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        <path d={crossPath} fill="none" stroke="rgba(0,0,0,0.62)" strokeWidth="5" />
-        <path d={crossPath} fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1.8" />
-        <path d={crossPath} fill="none" stroke="rgba(0,0,0,0.24)" strokeWidth="9" opacity="0.65" />
+        <path d={crossPath} fill="none" stroke="rgba(0,0,0,0.56)" strokeWidth="8" opacity="0.55" />
+        <path d={crossPath} fill="none" stroke="rgba(0,0,0,0.78)" strokeWidth="4.8" />
+        <path d={crossPath} fill="none" stroke="rgba(255,255,255,0.24)" strokeWidth="1.4" opacity="0.85" />
+        <path d={crossPath} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="3.2" opacity="0.7" />
       </svg>
     </div>
   );

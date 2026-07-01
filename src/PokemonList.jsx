@@ -60,7 +60,7 @@ export default function PokemonList() {
                     <PokemonCard
                         key={index}
                         name={pokemon.name}
-                        src={!(pokemonImages[pokemon.name]) ? `${import.meta.env.BASE_URL}assets/animation.gif` : pokemonImages[pokemon.name]}
+                        src={!(pokemonImages[pokemon.name]) ? `${import.meta.env.BASE_URL}assets/animation-small.gif` : pokemonImages[pokemon.name]}
                     />
                 ))}
             </div>

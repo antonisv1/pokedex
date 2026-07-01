@@ -39,7 +39,7 @@ export default function SearchBar() {
                         searchPokemon();
                     }
                 }}
-                className="flex-1 min-w-0 bg-transparent border-0 outline-none px-3 py-2 text-[clamp(0.6rem,1.4vw,0.75rem)] text-slate-700 placeholder:text-slate-500"
+                className="flex-1 min-w-0 bg-transparent border-0 outline-none px-3 py-2 text-[16px] text-slate-700 placeholder:text-slate-500"
                 aria-label="Search for a Pokémon"
             />
             <button
